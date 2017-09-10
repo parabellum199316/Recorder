@@ -48,6 +48,9 @@ class Recorder:NSObject{
     deinit {
         
         if !savedFlag{
+            guard lastRecordedFileURL != nil else {
+                return
+            }
            Recorder.deleteRecord(at: lastRecordedFileURL)
         }
     }
