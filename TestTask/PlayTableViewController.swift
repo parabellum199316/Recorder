@@ -15,6 +15,7 @@ class PlayTableViewController: UITableViewController {
     var sections:[DueDate]!
     fileprivate let cellID = "RecordCell"
    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -25,6 +26,7 @@ class PlayTableViewController: UITableViewController {
         
         
     }
+    
     func getLatestData(){
         
         sections = realm.objects(DueDate.self).sorted(by: {(lhs,rhs) -> Bool in
@@ -38,7 +40,7 @@ class PlayTableViewController: UITableViewController {
     
     
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section].dateString
     }
@@ -60,7 +62,6 @@ class PlayTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! RecordTableViewCell
         let section = indexPath.section
-        
         let record = sections[section].records[indexPath.row]
         cell.configureWithRecord(record)
         return cell
@@ -102,7 +103,10 @@ class PlayTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! RecordTableViewCell
-        player.playFrom(selectedCell: cell)
+        player.delegate = cell
+        let section = indexPath.section
+        let record = sections[section].records[indexPath.row]
+        player.play(from: record.url)
         tableView.deselectRow(at: indexPath, animated: true)
         
         
