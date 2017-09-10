@@ -7,39 +7,37 @@
 //
 
 import UIKit
+import AVFoundation
 
-
-class RecordViewController: UIViewController , RecorderDelegate{
-    
-    
-    func chekPermission(_ permission: Bool) {
-        if !permission{
-            state = .needPermission
-        }
-    }
+class RecordViewController: UIViewController{
     private enum State:String{
         case recording
         case stoped
         case needPermission
     }
+    
     @IBOutlet weak var recordingStateLabel: UILabel!
     private var state = State.stoped{
         didSet{
             updateUI()
         }
     }
-    private let recorder = Recorder()
+    private  var recorder: Recorder!
     
     @IBOutlet weak var toggleRecordButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !recorder.havePermission{
-            state = .needPermission
-        }else{
-            state = .stoped
+        recorder = Recorder()
+        AVAudioSession.sharedInstance().requestRecordPermission(){[unowned self] allowed in
+            if allowed{
+                self.state = .stoped
+            }else{
+                self.state = .needPermission
+            }
         }
+
     }
     
     @IBAction func toggleRecording(_ sender: Any) {
@@ -82,10 +80,9 @@ class RecordViewController: UIViewController , RecorderDelegate{
             toggleRecordButton.backgroundColor = .blue
             recordingStateLabel.text = "Press button to start recording"
         case .needPermission:
-            showAlert(title:"I need permission",message:"You can give me access to your mic in settings")
+            showAlert(title:"No access to MIC",message:"You can grant access from the settings app")
             toggleRecordButton.isEnabled = false
             saveButton.isEnabled = false
-            
         }
         
     }
