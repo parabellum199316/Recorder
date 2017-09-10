@@ -10,11 +10,10 @@ import UIKit
 
 class RecordTableViewCell: UITableViewCell {
 
+    
     @IBOutlet weak var timeLabel: UILabel!
     func configureWithRecord(_ record:Record){
-        
-        
-        
+        self.timeLabel.text = record.name
     }
     
     
