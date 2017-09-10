@@ -13,17 +13,18 @@ func getURLFromString(_ string:String) -> URL{
 }
 class Record: Object{
     //Init
-    convenience init(name:String, dateAdded:Date){
+    convenience init(name:String,urlString: String, dateAdded:Date){
         self.init()
         self.name = name
+        self.urlString = urlString
         self.dateAdded = dateAdded
     }
     
     //Properties
-    
     dynamic var name = ""
     dynamic var urlString = ""
-    dynamic var dateAdded = Date()
+    dynamic var dateAdded:Date!
+    
     
     
     var url:URL{
@@ -36,7 +37,4 @@ class Record: Object{
         return "name"
     }
     
-    
-    
-    //Etc
 }
