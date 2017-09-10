@@ -9,53 +9,69 @@
 
 import Foundation
 import AVFoundation
-
-class Player:NSObject {
+protocol PlayerDelegate{
+    func didFinishPlaying(flag:Bool)
+    func setRedColor(flag:Bool)
     
+}
+class Player:NSObject {
     static let shared = Player()
     override private init() {
         super.init()
         setupAudioSession()
-        
     }
-    
     private var audioSession = AVAudioSession.sharedInstance()
     private var player:AVAudioPlayer!
-    
-    weak var cell:RecordTableViewCell!
-    
     private func setupAudioSession(){
-    try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
+        try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
+    }
+    var isInMiddleOfPlaying = false
+    
+    var delegate:PlayerDelegate!{
+        didSet{
+            if let oldValue = oldValue{
+                oldValue.setRedColor(flag: false)
+                
+            }
+        }
     }
     
-    
-    func playFrom(selectedCell:RecordTableViewCell){
-        cell = selectedCell
+    func play(from url:URL){
         do {
-            player = try AVAudioPlayer(contentsOf:selectedCell.recordURL )
-            player.delegate  = self
-            guard let player = player else { return }
-            if !cell.isRed{
-                player.volume = 1
-                player.prepareToPlay()
-                selectedCell.toggleColor()
-                player.play()
+            if !isInMiddleOfPlaying{
+                player = try AVAudioPlayer(contentsOf:url)
+                player.delegate  = self
+                guard let player = player else { return }
+                if !player.isPlaying{
+                    player.volume = 1
+                    player.prepareToPlay()
+                    player.play()
+                    isInMiddleOfPlaying = true
+                    self.delegate.setRedColor(flag:true)
+                }
             }else{
-                cell.toggleColor()
-                player.stop()
+                stopPlaying()
             }
-        } catch let error {
-            print(error.localizedDescription)
+        } catch  {
+            fatalError("Failed to create player")
         }
-        
-        
+    }
+    
+    private func stopPlaying(){
+        guard let player = player else {return}
+        player.stop()
+        isInMiddleOfPlaying = false
+        self.delegate.setRedColor(flag:false)
     }
 }
+
 extension Player: AVAudioPlayerDelegate{
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        cell.toggleColor()
+        if flag{
+            self.delegate.setRedColor(flag:false)
+        }
+        self.isInMiddleOfPlaying = false
     }
-    
     
     
 }
