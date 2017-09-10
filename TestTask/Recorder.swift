@@ -9,8 +9,17 @@
 import Foundation
 import AVFoundation
 import RealmSwift
+func contertTimeToStringViaFormatter(_ duration:CMTime)->String{
+    let durationInSeconds = CMTimeGetSeconds(duration)
+    let date = Date(timeIntervalSince1970: durationInSeconds)
+    let dateFormatter = DateFormatter()
+    dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+    dateFormatter.dateFormat = "mm:ss"
+    let timeString = dateFormatter.string(from: date)
+    return timeString
 
-func convertDateFormatter(_ date: Date) -> String{
+}
+func convertDateToStringViaFormatter(_ date: Date) -> String{
     let inputDateFormatter = DateFormatter()
     inputDateFormatter.dateFormat = "dd/MM/YYYY"
     let showDateString = inputDateFormatter.string(from: date)
@@ -37,6 +46,7 @@ class Recorder:NSObject{
     }
     
     deinit {
+        
         if !savedFlag{
            Recorder.deleteRecord(at: lastRecordedFileURL)
         }
@@ -83,14 +93,15 @@ class Recorder:NSObject{
         numberOfRecords += 1
         UserDefaults.standard.set(numberOfRecords, forKey: "numberOfRecords")
         stopRecording()
+        let durationString = contertTimeToStringViaFormatter(AVAsset(url: recordedFileURL).duration)
         let realm = try! Realm()
-        let date = Date()
-        let record = Record(name: "\(numberOfRecords)record", urlString:recordedFileURL.absoluteString,dateAdded: date)
-        let dateString = convertDateFormatter(date)
+        let dateCreated = Date()
+        let record = Record(name: "\(numberOfRecords)record", urlString:recordedFileURL.absoluteString,dateAdded:dateCreated,durationString: durationString)
+        let dateString = convertDateToStringViaFormatter(dateCreated)
         var dueDate = realm.object(ofType: DueDate.self, forPrimaryKey: dateString)
         if dueDate == nil{
             dueDate = DueDate()
-            dueDate!.date = date
+            dueDate!.date = dateCreated
             dueDate!.dateString = dateString
             try! realm.write {
                 realm.add(dueDate!, update: true)
