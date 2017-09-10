@@ -12,7 +12,7 @@ import RealmSwift
 class PlayTableViewController: UITableViewController {
     var player = Player.shared
     let realm = try! Realm()
-    var sections:[DueDate]!
+    var sections:[DueDate] = []
     fileprivate let cellID = "RecordCell"
    
     
@@ -23,19 +23,10 @@ class PlayTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         getLatestData()
         tableView.reloadData()
-        
-        
     }
     
     func getLatestData(){
-        
-        sections = realm.objects(DueDate.self).sorted(by: {(lhs,rhs) -> Bool in
-            if lhs.date > rhs.date{
-                return true
-            }else{
-                return false
-            }
-        })
+        sections = realm.objects(DueDate.self).sorted(by: { return $0.date > $1.date})
     }
     
     
@@ -46,14 +37,12 @@ class PlayTableViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return sections != nil ? sections.count : 0
+        return  sections.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let dueDay = sections[section]
         let recordsCount = dueDay.records.count
-        print(recordsCount)
         return recordsCount
     }
     
@@ -74,11 +63,14 @@ class PlayTableViewController: UITableViewController {
         
         return true
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        player.stopPlaying()
+    }
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            player.stopPlaying()
             let dueDate =  sections[indexPath.section]
             let record = dueDate.records[indexPath.row]
             //Remove record from section
