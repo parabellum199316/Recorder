@@ -17,15 +17,16 @@ class RecordViewController: UIViewController{
     }
     
     @IBOutlet weak var recordingStateLabel: UILabel!
+    
     private var state = State.stoped{
         didSet{
             updateUI()
         }
     }
+    
     private  var recorder: Recorder!
-    
+   
     @IBOutlet weak var toggleRecordButton: UIButton!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,15 +58,11 @@ class RecordViewController: UIViewController{
         
     }
     
-    
-    
     @IBAction func save(_ sender: Any) {
         state = .stoped
         recorder.saveRecord()
         navigationController?.popViewController(animated: true)
     }
-    
-    
     
     @IBOutlet weak var saveButton: UIButton!
     private func updateUI(){
@@ -86,6 +83,7 @@ class RecordViewController: UIViewController{
         }
         
     }
+    
     private func showAlert(title:String, message:String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default) { _ in
