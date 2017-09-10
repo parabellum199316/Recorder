@@ -57,7 +57,7 @@ class Player:NSObject {
         }
     }
     
-    private func stopPlaying(){
+     func stopPlaying(){
         guard let player = player else {return}
         player.stop()
         isInMiddleOfPlaying = false
