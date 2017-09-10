@@ -66,9 +66,8 @@ class Recorder:NSObject{
                 audioRecorder = try AVAudioRecorder(url: fileName, settings: self.settings)
                 audioRecorder.delegate = self
                 audioRecorder.record()
-                print("RECORDING....")
             }catch{
-                print("RecordingFailed")
+                fatalError("RecordingFailed")
             }
         }
     }
