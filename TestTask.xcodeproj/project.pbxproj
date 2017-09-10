@@ -12,6 +12,7 @@
 		5C4BE63F1F629CCE00385401 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4BE63D1F629CCE00385401 /* Main.storyboard */; };
 		5C4BE6411F629CCE00385401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4BE6401F629CCE00385401 /* Assets.xcassets */; };
 		5C4BE6441F629CCE00385401 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4BE6421F629CCE00385401 /* LaunchScreen.storyboard */; };
+		5C4C1ACB1F64031F00B2C989 /* DueDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C1ACA1F64031F00B2C989 /* DueDate.swift */; };
 		5C5594361F63CD0B00479A8C /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5594351F63CD0B00479A8C /* Record.swift */; };
 		5C55943A1F63E09F00479A8C /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5594391F63E09F00479A8C /* RecordTableViewCell.swift */; };
 		5C55943C1F63E12B00479A8C /* PlayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55943B1F63E12B00479A8C /* PlayTableViewController.swift */; };
@@ -27,6 +28,7 @@
 		5C4BE6401F629CCE00385401 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C4BE6431F629CCE00385401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C4BE6451F629CCE00385401 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C4C1ACA1F64031F00B2C989 /* DueDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DueDate.swift; sourceTree = "<group>"; };
 		5C5594351F63CD0B00479A8C /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		5C5594391F63E09F00479A8C /* RecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		5C55943B1F63E12B00479A8C /* PlayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayTableViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			children = (
 				5C5594351F63CD0B00479A8C /* Record.swift */,
 				5C55943F1F63E1E600479A8C /* Recorder.swift */,
+				5C4C1ACA1F64031F00B2C989 /* DueDate.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C5594361F63CD0B00479A8C /* Record.swift in Sources */,
+				5C4C1ACB1F64031F00B2C989 /* DueDate.swift in Sources */,
 				5C55943C1F63E12B00479A8C /* PlayTableViewController.swift in Sources */,
 				5C55943E1F63E14E00479A8C /* RecordViewController.swift in Sources */,
 				5C5594401F63E1E600479A8C /* Recorder.swift in Sources */,

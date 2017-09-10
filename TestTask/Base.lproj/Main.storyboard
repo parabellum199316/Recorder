@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainCell" rowHeight="94" id="b1Y-5j-5eb" customClass="RecordTableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecordCell" rowHeight="94" id="b1Y-5j-5eb" customClass="RecordTableViewCell" customModule="TestTask">
                                 <rect key="frame" x="0.0" y="56" width="375" height="94"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b1Y-5j-5eb" id="e0Z-sj-dQA">
@@ -39,7 +39,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="timeLabel" destination="ArY-b9-3dJ" id="b7v-bB-5C6"/>
+                                    <outlet property="timeLabel" destination="ArY-b9-3dJ" id="pWB-Ab-CQa"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -82,6 +82,9 @@
                                         <state key="normal" title="Start/Stop">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="toggleRecording:" destination="WSa-wo-jyC" eventType="touchUpInside" id="bjx-aa-x4L"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s1P-zf-Y2y">
                                         <rect key="frame" x="0.0" y="36" width="303" height="30"/>
@@ -89,6 +92,9 @@
                                         <state key="normal" title="Save">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="save:" destination="WSa-wo-jyC" eventType="touchUpInside" id="Pr8-Tg-cV5"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -110,6 +116,7 @@
                     </view>
                     <connections>
                         <outlet property="recordingStateLabel" destination="UPj-Il-hmI" id="LgQ-4i-WXe"/>
+                        <outlet property="toggleRecordButton" destination="1QG-8j-Ddr" id="MKG-OX-PN5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Bf-Ev-kEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
