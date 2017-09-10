@@ -113,7 +113,7 @@ class Recorder:NSObject{
             
         }else{
             try! realm.write {
-                dueDate!.records.append(record)
+                dueDate!.records.insert(record, at: 0)
             }
         }
         
