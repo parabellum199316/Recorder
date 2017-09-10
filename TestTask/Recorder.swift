@@ -9,9 +9,7 @@
 import Foundation
 import AVFoundation
 import RealmSwift
-protocol RecorderDelegate:AnyObject{
-    func chekPermission(_ permission:Bool)
-}
+
 func convertDateFormatter(_ date: Date) -> String{
     let inputDateFormatter = DateFormatter()
     inputDateFormatter.dateFormat = "dd/MM/YYYY"
@@ -21,7 +19,7 @@ func convertDateFormatter(_ date: Date) -> String{
     return inputDateFormatter.string(from: showDate!)
 }
 class Recorder:NSObject{
-    weak var delegate:RecorderDelegate!
+    private var savedFlag:Bool = false
     private var lastRecordedFileURL:URL!
     var recordingSession = AVAudioSession.sharedInstance()
     var audioRecorder: AVAudioRecorder!
@@ -29,37 +27,27 @@ class Recorder:NSObject{
     private  let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC), AVSampleRateKey:12000, AVNumberOfChannelsKey: 1, AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
     
     
-    var havePermission:Bool = false
     
-    convenience init(delegate:RecorderDelegate){
-        self.init()
-        self.delegate = delegate
-    }
-    override init() {
+    
+    override init(){
         super.init()
         if let number:Int = UserDefaults.standard.object(forKey: "numberOfRecords") as? Int{
             numberOfRecords = number
         }
-        AVAudioSession.sharedInstance().requestRecordPermission { (bool) in
-            if bool{
-                self.havePermission = bool
-            }else{
-                self.havePermission = bool
-            }
+    }
+    
+    deinit {
+        if !savedFlag{
+           Recorder.deleteRecord(at: lastRecordedFileURL)
         }
     }
+    
     func record(){
-        guard havePermission else{
-            delegate.chekPermission(havePermission)
-            return
-        }
         //Check if we have an active recorder
         if audioRecorder == nil{
-            numberOfRecords += 1
+            
             let fileName = getDirectoryToSave().appendingPathComponent("\(numberOfRecords)record.m4a")
             lastRecordedFileURL = fileName
-            print(lastRecordedFileURL.relativeString)
-            
             //Start recording
             do{
                 audioRecorder = try AVAudioRecorder(url: fileName, settings: self.settings)
@@ -74,7 +62,7 @@ class Recorder:NSObject{
     
     
     static func deleteRecord(at url:URL){
-       try? FileManager.default.removeItem(at: url)
+        try? FileManager.default.removeItem(at: url)
     }
     
     
@@ -84,12 +72,16 @@ class Recorder:NSObject{
         if audioRecorder != nil{
             audioRecorder.stop()
             audioRecorder = nil
-            UserDefaults.standard.set(numberOfRecords, forKey: "numberOfRecords")
+            
         }
         
     }
     func saveRecord(){
+        
         guard let recordedFileURL = lastRecordedFileURL else{return}
+        savedFlag = true
+        numberOfRecords += 1
+        UserDefaults.standard.set(numberOfRecords, forKey: "numberOfRecords")
         stopRecording()
         let realm = try! Realm()
         let date = Date()
