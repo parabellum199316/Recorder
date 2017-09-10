@@ -66,20 +66,15 @@ class RecordViewController: UIViewController{
     
     @IBOutlet weak var saveButton: UIButton!
     private func updateUI(){
-        print("\(state.rawValue)")
         switch state {
         case .recording:
             toggleRecordButton.backgroundColor = .red
             recordingStateLabel.text = "Recording..."
         case .stoped:
-            toggleRecordButton.isEnabled = true
-            saveButton.isEnabled = true
             toggleRecordButton.backgroundColor = .blue
             recordingStateLabel.text = "Press button to start recording"
         case .needPermission:
             showAlert(title:"No access to MIC",message:"You can grant access from the settings app")
-            toggleRecordButton.isEnabled = false
-            saveButton.isEnabled = false
         }
         
     }
