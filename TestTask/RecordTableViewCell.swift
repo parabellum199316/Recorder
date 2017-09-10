@@ -10,15 +10,18 @@ import UIKit
 
 class RecordTableViewCell: UITableViewCell {
     var recordURL: URL!
-    var isRed:Bool = false
+    var isRed:Bool = false{
+        didSet{
+            toggleViewColor()
+        }
+    }
     @IBOutlet weak var timeLabel: UILabel!
     func configureWithRecord(_ record:Record){
-        self.timeLabel.text = record.name
+        self.timeLabel.text = record.durationString
         self.recordURL = record.url
     }
     
-    func toggleColor(){
-        isRed = !isRed
+    func toggleViewColor(){
         self.contentView.backgroundColor = isRed ? .red : .white
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -32,4 +35,12 @@ class RecordTableViewCell: UITableViewCell {
 
     
 
+}
+extension RecordTableViewCell:PlayerDelegate{
+    func didFinishPlaying(flag: Bool) {
+        self.isRed = flag
+    }
+    func setRedColor(flag:Bool){
+        self.isRed = flag
+    }
 }
