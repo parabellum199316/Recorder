@@ -10,32 +10,65 @@ import UIKit
 
 
 class RecordViewController: UIViewController {
-   private enum State:String{
+    
+    private enum State:String{
         case recording
-        case stop
+        case stoped
     }
-
     @IBOutlet weak var recordingStateLabel: UILabel!
+    private var state = State.stoped{
+        didSet{
+            updateUI()
+        }
+    }
+    private let recorder = Recorder()
+    
+    @IBOutlet weak var toggleRecordButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func toggleRecording(_ sender: Any) {
+        switch  state{
+        case .stoped:
+            state = .recording
+            recorder.record()
+            
+        case .recording:
+            state = .stoped
+            recorder.stopRecording()
+            
+            
+        }
+     
     }
-    */
-
+    
+    
+    
+    @IBAction func save(_ sender: Any) {
+        state = .stoped
+        recorder.saveRecord()
+    }
+    
+    
+    
+    private func updateUI(){
+        print("\(state.rawValue)")
+        switch state {
+        case .recording:
+            toggleRecordButton.backgroundColor = .red
+            recordingStateLabel.text = "Recording..."
+        case .stoped:
+            toggleRecordButton.backgroundColor = .blue
+            recordingStateLabel.text = "Press button to start recording"
+            
+            
+        }
+        
+        
+        
+    }
 }
