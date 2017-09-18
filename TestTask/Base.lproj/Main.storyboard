@@ -116,6 +116,7 @@
                     </view>
                     <connections>
                         <outlet property="recordingStateLabel" destination="UPj-Il-hmI" id="LgQ-4i-WXe"/>
+                        <outlet property="saveButton" destination="s1P-zf-Y2y" id="fUA-Vj-MGE"/>
                         <outlet property="toggleRecordButton" destination="1QG-8j-Ddr" id="MKG-OX-PN5"/>
                     </connections>
                 </viewController>

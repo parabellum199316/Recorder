@@ -13,6 +13,7 @@
 		5C4BE6411F629CCE00385401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4BE6401F629CCE00385401 /* Assets.xcassets */; };
 		5C4BE6441F629CCE00385401 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4BE6421F629CCE00385401 /* LaunchScreen.storyboard */; };
 		5C4C1ACB1F64031F00B2C989 /* DueDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C1ACA1F64031F00B2C989 /* DueDate.swift */; };
+		5C4C1ACD1F642B1300B2C989 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C1ACC1F642B1300B2C989 /* Player.swift */; };
 		5C5594361F63CD0B00479A8C /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5594351F63CD0B00479A8C /* Record.swift */; };
 		5C55943A1F63E09F00479A8C /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5594391F63E09F00479A8C /* RecordTableViewCell.swift */; };
 		5C55943C1F63E12B00479A8C /* PlayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55943B1F63E12B00479A8C /* PlayTableViewController.swift */; };
@@ -29,6 +30,7 @@
 		5C4BE6431F629CCE00385401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C4BE6451F629CCE00385401 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C4C1ACA1F64031F00B2C989 /* DueDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DueDate.swift; sourceTree = "<group>"; };
+		5C4C1ACC1F642B1300B2C989 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		5C5594351F63CD0B00479A8C /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		5C5594391F63E09F00479A8C /* RecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		5C55943B1F63E12B00479A8C /* PlayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayTableViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				5C5594351F63CD0B00479A8C /* Record.swift */,
 				5C55943F1F63E1E600479A8C /* Recorder.swift */,
 				5C4C1ACA1F64031F00B2C989 /* DueDate.swift */,
+				5C4C1ACC1F642B1300B2C989 /* Player.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				5C4C1ACB1F64031F00B2C989 /* DueDate.swift in Sources */,
 				5C55943C1F63E12B00479A8C /* PlayTableViewController.swift in Sources */,
 				5C55943E1F63E14E00479A8C /* RecordViewController.swift in Sources */,
+				5C4C1ACD1F642B1300B2C989 /* Player.swift in Sources */,
 				5C5594401F63E1E600479A8C /* Recorder.swift in Sources */,
 				5C4BE63A1F629CCE00385401 /* AppDelegate.swift in Sources */,
 				5C55943A1F63E09F00479A8C /* RecordTableViewCell.swift in Sources */,
@@ -391,11 +395,13 @@
 			baseConfigurationReference = 39C6B3C78822C2F06C3FF067 /* Pods-TestTask.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = S4PHWUSXY3;
 				INFOPLIST_FILE = TestTask/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.parabellumprod.TestTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -405,11 +411,13 @@
 			baseConfigurationReference = 9129C999FA58C9B67B39BB34 /* Pods-TestTask.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = S4PHWUSXY3;
 				INFOPLIST_FILE = TestTask/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.parabellumprod.TestTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
