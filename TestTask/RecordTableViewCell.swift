@@ -15,7 +15,14 @@ class RecordTableViewCell: UITableViewCell {
             toggleViewColor()
         }
     }
+    //MARK: - Life cycle
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
+    //MARK: - Outlets
     @IBOutlet weak var timeLabel: UILabel!
+    //MARK: - Funcs
     func configureWithRecord(_ record:Record){
         self.timeLabel.text = record.durationString
         self.recordURL = record.url
@@ -24,15 +31,8 @@ class RecordTableViewCell: UITableViewCell {
     func toggleViewColor(){
         self.contentView.backgroundColor = isRed ? .red : .white
     }
-    override func setSelected(_ selected: Bool, animated: Bool) {
     
-    }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
     
 
 }

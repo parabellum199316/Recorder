@@ -10,10 +10,12 @@ import UIKit
 import RealmSwift
 
 class PlayTableViewController: UITableViewController {
-    var player = Player.shared
-    let realm = try! Realm()
-    var sections:[DueDate] = []
     fileprivate let cellID = "RecordCell"
+    let realm = try! Realm()
+    var player = Player.shared
+    var sections:[DueDate] = []
+    
+    
    
     
     override func viewDidLoad() {
